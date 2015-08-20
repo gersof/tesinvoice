@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descripproduct: MyString
+  priceunit: 9.99
+  category: 
+
+two:
+  descripproduct: MyString
+  priceunit: 9.99
+  category: 

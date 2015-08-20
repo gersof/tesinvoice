@@ -1,0 +1,101 @@
+<%= form_for(@invoice) do |f| %>
+  <% if @invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+      <% @invoice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="col-md-2">
+   <div class="form-group">
+    <label for="datainvoice">Fecha Factura</label>
+    <%= f.text_field :dateinvoice, class: "datepicker form-control" %>
+  </div>
+  </div>
+   <div class="col-md-4">
+   <div class="form-group">
+    <label for="clientes">Cliente</label>
+     <%= f.select("client_id", Client.all.collect {|p| [ p.nameclient, p.id ] }, {include_blank: 'None'},{class: "form-control"}) %>
+  </div>
+  </div>
+     <div class="col-md-1">
+   <div class="form-group">
+   <a href="#" data-toggle="modal" data-target="#modalproductos"><%= image_tag("add.png", size: "50x50", alt: "Edit Entry") %></a>
+  </div>
+  </div>
+</div>
+<div class="row">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="info">
+      <th>Cantidad</th>
+      <th>Producto</th>
+      <th>Valor Unidad</th>
+      <th>Precio Total</th>
+      </tr>
+    </thead>
+    <tfoot>
+       <tr>
+        <td colspan="3" align="right"><strong>Total</strong></td>
+        <td >0.0</td>
+      </tr>
+    </tfoot>
+    <tbody id="bodyfactura">
+      
+    </tbody>
+  </table>
+</div>
+  <div class="row">
+    <div class="col-md-4">
+   <div class="form-group">
+    <label for="clientes">Observaciones Factura</label>
+      <%= f.text_area :noteinvoice, class: "form-control" %>
+  </div>
+  </div>
+</div>
+
+ 
+  <div class="actions">
+    <%= f.submit "Guardar", class: "btn btn-primary" %>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="modalproductos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center" id="myModalLabel">Agregar producto</h4>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-md-2">
+             <div class="form-group">
+              <label for="datainvoice">Cantidad</label>
+              <%= f.text_field :dateinvoice, class: "datepicker form-control" %>
+            </div>
+            </div>
+           
+             <div class="col-md-5">
+             <div class="form-group">
+              <label for="clientes">Producto</label>
+               <%= select("product_id", Product.all.collect {|p| [ p.descripproduct, p.id ] }, {include_blank: 'None'},{class: "form-control"}) %>
+             </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-primary">Agrega producto</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+        </div>
+    </div>
+  </div>
+
+<% end %>
